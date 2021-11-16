@@ -14,4 +14,8 @@ class Person
   end
 
   private:is_of_age?
+
+  def can_use_services?
+    is_of_age? || parent_permission == true
+  end
 end
