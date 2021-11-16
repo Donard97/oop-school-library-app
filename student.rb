@@ -1,7 +1,9 @@
-require './person.rb'
+# frozen_string_literal: true
 
-class Student > person
-  def initialize(classrom,age, name = 'Unknown', parent_permission: true)
+require './person'
+
+class Student < Person # rubocop:todo Style/Documentation
+  def initialize(_classrom, age, name = 'Unknown', parent_permission: true)
     super(age, name, parent_permission)
     @classrom = classroom
   end
