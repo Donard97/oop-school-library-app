@@ -1,7 +1,8 @@
 require_relative './person'
 
 class Student < Person
-  def initialize(_classrom, age, name = 'Unknown', parent_permission: true)
+  attr_accessor :classroom
+  def initialize(classrom, age, name = 'Unknown', parent_permission: true)
     super(age, name, parent_permission)
     @classrom = classroom
   end
