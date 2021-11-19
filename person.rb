@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+# rubocop: disable Style/OptionalBooleanParameter
+
 require_relative './corrector'
 
 class Person
@@ -13,7 +16,7 @@ class Person
     @rentals = []
   end
 
-  def add_rental(_rental)
+  def add_rental(date, book)
     Rental.new(date, self, book)
   end
 
@@ -22,7 +25,8 @@ class Person
   end
 
   def validate_name
-    @name = @corrector.correct_name
+    validate = @corrector
+    @name = @corrector.correct_name(@name)
   end
 
   private :of_age?
@@ -31,6 +35,4 @@ class Person
     of_age? || parent_permission == true
   end
 end
-
-me = Person.new(14, 'donard')
-p me.validate_name
+# rubocop: enable Style/OptionalBooleanParameter
