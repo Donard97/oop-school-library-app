@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 # rubocop: disable Style/OptionalBooleanParameter
 
 require_relative './corrector'
@@ -25,7 +24,6 @@ class Person
   end
 
   def validate_name
-    validate = @corrector
     @name = @corrector.correct_name(@name)
   end
 
