@@ -6,6 +6,9 @@ Imagine that you are the librarian of OOP University, and you need a tool to rec
 - Add new books.
 - Save records of who borrowed a given book and when.
 
+![sc1](https://user-images.githubusercontent.com/74506933/142516607-0af2904c-7835-4a39-aebb-e81f9660f62a.PNG)
+![sc2](https://user-images.githubusercontent.com/74506933/142516613-2bad5944-cf7a-481d-a3e3-12d58221e688.PNG)
+
 
 ## Built With
 
