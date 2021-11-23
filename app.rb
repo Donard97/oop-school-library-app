@@ -1,106 +1,76 @@
-require_relative 'student'
-require_relative 'teacher'
-require_relative 'book'
-require_relative 'rental'
+module App
+  INPUT_MSG = 'Enter an option number here: '.freeze
+  ENTER_MSG = 'Press ENTER to continue'.freeze
 
-class App
-  def initialize
-    @books = []
-    @persons = []
-    @rentals = []
+  def enter_msg
+    print ENTER_MSG
+    gets
+    puts
   end
 
-  def list_all_books
-    puts 'There are no books registered! Please add books.' if @books.empty?
-    @books.each { |book| puts book }
+  def display_books
+    puts 'List of books:'
+    puts 'There is no book registered!' if @books.empty?
+    @books.each_with_index { |book, index| puts "#{index}) Title: #{book.title}, Author: #{book.author}" }
   end
 
-  def list_all_people
-    puts 'The are no people registered! Please add a student or teacher.' if @persons.empty?
-    @persons.each { |person| puts person }
-  end
-
-  def list_rentals_by_person_id
-    print 'ID of person: '
-    id = gets.chomp.to_i
-
-    puts 'Rentals:'
-    @rentals.each do |rental|
-      puts "Date: #{rental.date}, Book: #{rental.book.title}' by #{rental.book.author}" if rental.person.id == id
+  def display_people
+    puts 'List of people:'
+    puts 'There is no people registered!' if @people.empty?
+    @people.each_with_index do |person, index|
+      puts "#{index}) Name: #{person.name}, Age: #{person.age}, ID: #{person.id}"
     end
   end
 
-  def create_teacher
-    print 'Age: '
-    age = gets.chomp
-
-    print 'Name: '
-    name = gets.chomp
-
-    print 'Specialization: '
-    specialization = gets.chomp
-
-    @persons.push(Teacher.new(age, specialization, name))
-  end
-
-  def create_student
-    print 'Age: '
-    age = gets.chomp
-
-    print 'Name: '
-    name = gets.chomp
-
-    print 'Has parent permission? [Y/N]: '
-    parent_permission = gets.chomp != 'n'
-
-    @persons.push(Student.new(age, 'learn to code', name, parent_permission))
-  end
-
-  def create_person
-    print 'Do you want to create a student (1) or a teacher (2)? [Input the number]: '
-    person_type = 0
-
-    person_type = gets.chomp while person_type != '2' && person_type != '1'
-
-    case person_type
-    when '1'
-      create_student
-    when '2'
-      create_teacher
+  def create_person(decision, age, name)
+    case decision
+    when 1
+      create_student_input(age, name)
+    else
+      create_teacher_input(age, name)
     end
-
-    puts 'Person created successfully'
+    puts
   end
 
-  def create_book
-    print 'Title: '
-    title = gets.chomp
-
-    print 'Author: '
-    author = gets.chomp
-
-    @books.push(Book.new(title, author))
-
+  def create_book(title, author)
+    @books << Book.new(title, author)
+    puts
     puts 'Book created successfully'
+    puts
   end
 
-  def create_rental
-    puts 'Select a book from the following list by number'
-    @books.each_with_index { |book, index| puts "#{index} Title: #{book.title}, Author: #{book.author}" }
-    selected_book = gets.chomp.to_i
-    book = @books[selected_book]
-
-    puts 'Select a person from the following list by number'
-    @persons.each_with_index do |person, index|
-      puts "#{index} [#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
-    end
-    selected_person = gets.chomp.to_i
-    person = @persons[selected_person]
-
-    print 'Date: '
-    date = gets.chomp
-
-    @rentals.push(Rental.new(date, person, book))
+  def create_rental(book_index, person_index, date)
+    Rental.new(date, @books[book_index], @people[person_index])
     puts 'Rental created successfully'
+    puts
+  end
+
+  def display_rentals(person_input)
+    renter = @people.select { |person| person.id == (person_input) }
+    if renter.empty?
+      puts 'No rentals found for this ID'
+      user_rental_id_input
+    else
+      puts renter
+      puts "Rentals of #{renter.first.name}:"
+      puts 'There is no book rentered!' if renter.first.rentals.empty?
+      puts(renter.first.rentals.map { |rental| "Book: #{rental.book}, Rented on: #{rental.date}" })
+      enter_msg
+    end
+  end
+
+  private
+
+  def create_student(age, name, permission)
+    @people << Student.new(age, name, permission)
+    puts 'Student created successfully'
+    puts
+  end
+
+  def create_teacher(age, name, specialty)
+    @people << Teacher.new(specialty, age, name)
+    puts
+    puts 'Teacher created successfully'
+    puts
   end
 end
