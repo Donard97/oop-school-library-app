@@ -1,6 +1,6 @@
 module App
-  INPUT_MSG = 'Enter an option number here: '.freeze
-  ENTER_MSG = 'Press ENTER to continue'.freeze
+  INPUT_MSG = 'Enter an option number here: '
+  ENTER_MSG = 'Press ENTER to continue'
 
   def enter_msg
     print ENTER_MSG
@@ -40,7 +40,7 @@ module App
   end
 
   def create_rental(book_index, person_index, date)
-    Rental.new(date, @books[book_index], @people[person_index])
+    Rental.new(date, @people[person_index], @books[book_index])
     puts 'Rental created successfully'
     puts
   end
@@ -51,14 +51,12 @@ module App
       puts 'No rentals found for this ID'
       user_rental_id_input
     else
-      puts renter
-      puts "Rentals of #{renter.first.name}:"
-      puts 'There is no book rentered!' if renter.first.rentals.empty?
-      puts(renter.first.rentals.map { |rental| "Book: #{rental.book.title}, Rented on: #{rental.date}" })
+      puts "Rentals of #{renter[0].name}:"
+      puts 'There is no book rentered!' if renter[0].rentals.empty?
+      renter[0].rentals.map { |rental| puts "Book: #{rental.book.title}, Rented on: #{rental.date}\n" }
       enter_msg
     end
   end
-  
 
   private
 
