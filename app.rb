@@ -29,3 +29,29 @@ class App
       puts "Date: #{rental.date}, Book: #{rental.book.title}' by #{rental.book.author}" if rental.person.id == id
     end
   end
+  
+  def create_teacher
+    print 'Age: '
+    age = gets.chomp
+
+    print 'Name: '
+    name = gets.chomp
+
+    print 'Specialization: '
+    specialization = gets.chomp
+
+    @persons.push(Teacher.new(age, specialization, name))
+  end
+
+  def create_student
+    print 'Age: '
+    age = gets.chomp
+
+    print 'Name: '
+    name = gets.chomp
+
+    print 'Has parent permission? [Y/N]: '
+    parent_permission = gets.chomp != 'n'
+
+    @persons.push(Student.new(age, 'learn to code', name, parent_permission))
+  end
