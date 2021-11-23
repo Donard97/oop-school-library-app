@@ -54,10 +54,11 @@ module App
       puts renter
       puts "Rentals of #{renter.first.name}:"
       puts 'There is no book rentered!' if renter.first.rentals.empty?
-      puts(renter.first.rentals.map { |rental| "Book: #{rental.book}, Rented on: #{rental.date}" })
+      puts(renter.first.rentals.map { |rental| "Book: #{rental.book.title}, Rented on: #{rental.date}" })
       enter_msg
     end
   end
+  
 
   private
 
