@@ -84,8 +84,6 @@ class App
     puts 'Book created successfully'
   end
 
-  # rubocop:disable Metrics/MethodLength
-  # rubocop:disable Metrics/AbcSize
   def create_rental
     puts 'Select a book from the following list by number'
     @books.each_with_index { |book, index| puts "#{index} Title: #{book.title}, Author: #{book.author}" }
@@ -105,6 +103,4 @@ class App
     @rentals.push(Rental.new(date, person, book))
     puts 'Rental created successfully'
   end
-  # rubocop:enable Metrics/MethodLength
-  # rubocop:enable Metrics/AbcSize
 end

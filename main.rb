@@ -1,4 +1,3 @@
-# rubocop:disable Metrics/MethodLength
 require_relative 'app'
 
 def menu
@@ -38,7 +37,6 @@ def get_option(library, choice)
   end
 end
 
-# rubocop:enable Metrics/CyclomaticComplexity
 # rubocop:enable Metrics/MethodLength
 def run
   library = App.new
