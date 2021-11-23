@@ -29,6 +29,7 @@ class Main
     print INPUT_MSG
   end
 
+  # rubocop:disable Metrics
   def select_option
     case @main_ans
     when 1
@@ -52,6 +53,8 @@ class Main
       end
     end
   end
+
+  # rubocop:enable Metrics
 
   def user_person_input
     decision = 0
