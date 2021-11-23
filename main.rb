@@ -37,7 +37,7 @@ def get_option(library, choice)
   end
 end
 
-# rubocop:enable Metrics/MethodLength
+# rubocop:enable Metrics/CyclomaticComplexity
 def run
   library = App.new
   choice = 0
