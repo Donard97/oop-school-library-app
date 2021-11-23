@@ -137,4 +137,10 @@ module App
         @rentals = []
     end
   end
+
+  def save_files
+    File.write('books.json', JSON.generate(@books)) if @books.any?
+    File.write('person.json', JSON.generate(@persons)) if @persons.any?
+    File.write('rentals.json', JSON.generate(@rentals)) if @rentals.any?
+  end
 end
