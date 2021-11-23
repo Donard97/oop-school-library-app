@@ -1,3 +1,5 @@
+require 'json'
+
 module App
   INPUT_MSG = 'Enter an option number here: '.freeze
   ENTER_MSG = 'Press ENTER to continue'.freeze
@@ -72,4 +74,10 @@ module App
     puts 'Teacher created successfully'
     puts
   end
+
+  def load_files
+    @books = load_books
+    load_persons
+    load_rentals(@persons, @books)
+  end  
 end
