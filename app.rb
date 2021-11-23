@@ -29,7 +29,7 @@ class App
       puts "Date: #{rental.date}, Book: #{rental.book.title}' by #{rental.book.author}" if rental.person.id == id
     end
   end
-  
+
   def create_teacher
     print 'Age: '
     age = gets.chomp
@@ -84,15 +84,16 @@ class App
     puts 'Book created successfully'
   end
 
+  # rubocop:disable Metrics/MethodLength
+  # rubocop:disable Metrics/AbcSize
   def create_rental
     puts 'Select a book from the following list by number'
     @books.each_with_index { |book, index| puts "#{index} Title: #{book.title}, Author: #{book.author}" }
     selected_book = gets.chomp.to_i
     book = @books[selected_book]
 
-puts 'Select a person from the following list by number'
+    puts 'Select a person from the following list by number'
     @persons.each_with_index do |person, index|
-      splited_name = person.class.name.split('::').last
       puts "#{index} [#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
     end
     selected_person = gets.chomp.to_i
@@ -104,4 +105,6 @@ puts 'Select a person from the following list by number'
     @rentals.push(Rental.new(date, person, book))
     puts 'Rental created successfully'
   end
+  # rubocop:enable Metrics/MethodLength
+  # rubocop:enable Metrics/AbcSize
 end

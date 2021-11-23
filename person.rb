@@ -1,5 +1,4 @@
 # rubocop: disable Style/OptionalBooleanParameter
-
 require_relative './corrector'
 
 class Person

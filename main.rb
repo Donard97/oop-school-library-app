@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/MethodLength
 require_relative 'app'
 
 def menu
@@ -17,6 +18,7 @@ def menu
   gets.chomp.to_i
 end
 
+# rubocop:disable Metrics/CyclomaticComplexity
 def get_option(library, choice)
   case choice
   when 1
@@ -36,6 +38,8 @@ def get_option(library, choice)
   end
 end
 
+# rubocop:enable Metrics/CyclomaticComplexity
+# rubocop:enable Metrics/MethodLength
 def run
   library = App.new
   choice = 0
