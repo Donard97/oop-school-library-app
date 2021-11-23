@@ -1,179 +1,138 @@
-# rubocop:disable Metrics
+require_relative 'student'
+require_relative 'teacher'
+require_relative 'classroom'
+require_relative 'book'
+require_relative 'rental'
+require_relative 'app'
 
-require './book'
-require './classroom'
-require './rental'
-require './person'
-require './student'
-require './teacher'
+class Main
+  include App
 
-class App
   def initialize
-    @people = []
+    @main_ans = 0
     @books = []
-    @rentals = []
-    @class = Classroom.new('Grade 7')
+    @people = []
+
+    puts 'Welcome to School Library App!'
+    puts
   end
 
-  def run
-    puts 'Welcome to School Library App'
-    sleep 0.8
-    menu
-  end
-
-  def menu
-    puts 'Please choose an option by entering a number'
+  def show_options
+    puts 'Please choose an option by entering a number:'
     puts '1 - List all books'
     puts '2 - List all people'
     puts '3 - Create a person'
     puts '4 - Create a book'
     puts '5 - Create a rental'
-    puts '6 - List all rentals for a given person id'
+    puts '6 - List all rentals for a given person ID'
     puts '7 - Exit'
-    option = gets.chomp
-    get_option option
+    print INPUT_MSG
   end
 
-  def get_option(input)
-    case input
-    when '1'
-      list_all_books
-    when '2'
-      list_all_people
-    when '3'
-      create_a_person
-    when '4'
-      create_a_book
-    when '5'
-      create_a_rental
-    when '6'
-      list_rentals_by_person_id
-    when '7'
-      puts 'Thank you for using our library'
+  # rubocop:disable Metrics
+  def select_option
+    case @main_ans
+    when 1
+      display_books
+      enter_msg
+    when 2
+      display_people
+      enter_msg
+    when 3
+      user_person_input
+    when 4
+      user_book_input
+    when 5
+      user_rental_input unless @books.empty? && @people.empty?
+    when 6
+      user_rental_id_input
     else
-      puts 'Please enter a number between 1 and 7'
+      if @main_ans != 7
+        puts 'Invalid input, please try again'
+        puts
+      end
     end
   end
 
-  def list_all_books
-    puts 'There are no books registered! Please add books.' if @books.empty?
-    @books.each { |book| puts "Title: #{book.title}, Author: #{book.author}" }
-    sleep 0.8
-    menu
-  end
+  # rubocop:enable Metrics
 
-  def list_all_people
-    puts 'The are no people registered! Please add a student or teacher.' if @people.empty?
-    @people.map { |person| puts "[#{person.class}] Name: #{person.name}, Id: #{person.id}, Age: #{person.age}, " }
-    sleep 0.8
-    menu
-  end
+  def user_person_input
+    decision = 0
+    until [1, 2].include?(decision)
+      puts 'Do you want to create a student (1), or a teacher (2)?'
+      print INPUT_MSG
+      decision = gets.chomp.to_i
+      next if [1, 2].include?(decision)
 
-  def create_a_person
-    print 'Do you want to create a student (1) or teacher (2) [Input a number]: '
-    option = gets.chomp
-
-    case option
-    when '1'
-      create_a_student
-    when '2'
-      create_a_teacher
-    else
-      puts 'Invalid input. Please type 1 or 2'
+      puts
+      puts 'Invalid input, please try again'
+      puts
     end
-  end
-
-  def create_a_student
-    print 'Age '
+    print 'Age: '
     age = gets.chomp.to_i
-
-    print 'Name '
+    print 'Name: '
     name = gets.chomp
-
-    print 'Has parent permission? [Y/N]: '
-    parent_permission = gets.chomp.downcase
-
-    student = Student.new(age, @class, name, parent_permission)
-    @people << student
-
-    puts 'Student create successfully'
-    sleep 0.8
-    menu
+    create_person(decision, age, name)
   end
 
-  def create_a_teacher
-    print 'Age '
-    age = gets.chomp.to_i
-
-    print 'Name '
-    name = gets.chomp
-
-    print 'Specialization'
-    specialization = gets.chomp
-
-    teacher = Teacher.new(specialization, age, name)
-    @people << teacher
-
-    puts 'Teacher create successfully'
-    sleep 0.8
-    menu
-  end
-
-  def create_a_book
-    print 'Title '
+  def user_book_input
+    puts 'Please, enter book information below:'
+    print 'Title:'
     title = gets.chomp
-
-    print 'Author '
+    print 'Author: '
     author = gets.chomp
+    create_book(title, author)
+  end
 
-    book = Book.new(title, author)
-    @books << book
+  def user_rental_input
+    puts 'Select a book from the following list:'
+    display_books
+    print INPUT_MSG
+    book_index = gets.chomp.to_i
+    puts
+    puts 'Select a person form the following list:'
+    display_people
+    print INPUT_MSG
+    person_index = gets.chomp.to_i
+    puts
+    print 'Enter date of retrieval: '
+    date = gets.chomp
+    create_rental(book_index, person_index, date)
+  end
 
-    puts 'Book added successfully'
-    sleep 0.8
-    menu
+  def user_rental_id_input
+    loop do
+      print 'Enter the person\'s ID: '
+      display_people
+      person_input = gets.chomp.to_i
+      display_rentals(person_input)
+      break if person_input
+    end
+  end
+
+  def create_student_input(age, name)
+    print 'Has parent permission? [Y/N]: '
+    permission = gets.chomp.upcase
+    permission = permission != 'N'
+    create_student(age, name, permission)
+  end
+
+  def create_teacher_input(age, name)
+    print 'Specialty --> '
+    specialty = gets.chomp
+    create_teacher(age, name, specialty)
+  end
+
+  def main
+    until @main_ans == 7
+      show_options
+      @main_ans = gets.chomp.to_i
+      puts
+      select_option
+    end
+    puts 'Exiting session'
+    puts 'Thank you for using the Library School App!'
   end
 end
 
-def create_a_rental
-  puts 'Select a book frrom the following list by number'
-  @books.each_with_index { |book, index| puts "#{index} Title: #{book.title}, Author: #{book.author}" }
-
-  book_id = gets.chomp.to_i
-
-  puts 'Select a person from the following list by number (not id)'
-  @people.each_with_index do |person, index|
-    puts "#{index} [#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
-  end
-
-  person_id = gets.chomp.to_i
-
-  print 'Date: '
-  date = gets.chomp.to_i
-
-  rental = Rental.new(date, @people[person_id], @books[book_id])
-  @rentals << rental
-
-  puts 'Rental created successfully'
-  sleep 0.8
-  menu
-end
-
-def list_rentals_by_person_id
-  print 'ID of person: '
-  id = gets.chomp.to_i
-
-  puts 'Rentals:'
-  @rentals.each do |rental|
-    puts "Date: #{rental.date}, Book: #{rental.book.title}' by #{rental.book.author}" if rental.person.id == id
-  end
-  sleep 0.8
-  menu
-end
-
-def main
-  app = App.new
-  app.run
-end
-# rubocop:enable Metrics
-main
+Main.new.main
