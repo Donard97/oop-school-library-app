@@ -130,7 +130,7 @@ module App
     if File.exist?('rentals.json')
       JSON.parse(File.read('rentals.json')).map do |rental|
         book = books.find { |curr_book| curr_book.title == rental['book'] }
-        person = person.find { |curr_person| curr_person.id == rental ['person'].to_i }
+        person = person.find { |curr_person| curr_person.id == rental['person'].to_i }
 
         @rentals.push(Rental.new(rental['date'], person, book))
       end
@@ -146,4 +146,4 @@ module App
   end
 end
 
-# rubocop:disable Metrics/ClassLength
+# rubocop:enable Metrics/ClassLength
