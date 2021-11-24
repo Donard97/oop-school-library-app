@@ -18,6 +18,4 @@ class Rental
       'person' => @person.id
     }.to_json(*args)
   end
-
-
 end

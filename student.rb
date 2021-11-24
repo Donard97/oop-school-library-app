@@ -19,7 +19,5 @@ class Student < Person
       'parent_permission' => @parent_permission
     }.to_json(*args)
   end
-
-
 end
 # rubocop: enable Style/OptionalBooleanParameter

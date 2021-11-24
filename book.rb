@@ -23,5 +23,4 @@ class Book
   def self.json_create(object)
     new(object['title'], object['author'])
   end
-
 end

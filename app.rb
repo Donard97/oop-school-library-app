@@ -80,7 +80,7 @@ module App
     load_persons
     load_rentals(@persons, @books)
   end
-  
+
   def load_books
     if File.exist?('books.json')
       JSON.parse(File.read('books.json'), create_addititons: true)
@@ -128,13 +128,13 @@ module App
   def load_rentals(person, books)
     if File.exist?('rentals.json')
       JSON.parse(File.read('rentals.json')).map do |rental|
-        book =  books.find { |curr_book| curr_book.title == rental['book'] }
+        book = books.find { |curr_book| curr_book.title == rental['book'] }
         person = person.find { |curr_person| curr_person.id == rental ['person'].to_i }
 
         @rentals.push(Rental.new(rental['date'], person, book))
       end
     else
-        @rentals = []
+      @rentals = []
     end
   end
 
