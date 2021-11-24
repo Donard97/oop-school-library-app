@@ -1,5 +1,6 @@
 require 'json'
 
+# rubocop:disable ClassLength
 module App
   INPUT_MSG = 'Enter an option number here: '.freeze
   ENTER_MSG = 'Press ENTER to continue'.freeze
@@ -106,8 +107,8 @@ module App
   def load_teacher(person)
     id = person['id'].to_i
     name = person['name']
-    age = person ['age']
-    specialization = person ['specialization']
+    age = person['age']
+    specialization = person['specialization']
 
     teacher = Teacher.new(age, specialization, name)
     teacher.id = id
@@ -118,7 +119,7 @@ module App
     id = person['id'].to_i
     name = person['name']
     age = person['age']
-    parent_permission = person ['parent_permission']
+    parent_permission = person['parent_permission']
 
     student = Student.new(age, classroom, name, parent_permission)
     student.id = id
@@ -129,7 +130,7 @@ module App
     if File.exist?('rentals.json')
       JSON.parse(File.read('rentals.json')).map do |rental|
         book = books.find { |curr_book| curr_book.title == rental['book'] }
-        person = person.find { |curr_person| curr_person.id == rental ['person'].to_i }
+        person = person.find{ |curr_person| curr_person.id == rental ['person'].to_i }
 
         @rentals.push(Rental.new(rental['date'], person, book))
       end
@@ -144,3 +145,5 @@ module App
     File.write('rentals.json', JSON.generate(@rentals)) if @rentals.any?
   end
 end
+
+# rubocop:enable ClassLength
