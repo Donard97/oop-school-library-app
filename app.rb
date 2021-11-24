@@ -1,6 +1,7 @@
 require 'json'
 
-# rubocop:disable Metrics/ClassLength
+# rubocop:disable Metrics/ModuleLength
+
 module App
   INPUT_MSG = 'Enter an option number here: '.freeze
   ENTER_MSG = 'Press ENTER to continue'.freeze
@@ -145,5 +146,4 @@ module App
     File.write('rentals.json', JSON.generate(@rentals)) if @rentals.any?
   end
 end
-
-# rubocop:enable Metrics/ClassLength
+# rubocop:enable Metrics/ModuleLength
