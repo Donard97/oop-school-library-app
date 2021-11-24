@@ -1,7 +1,6 @@
 require 'json'
 
 # rubocop:disable Metrics/ModuleLength
-
 module App
   INPUT_MSG = 'Enter an option number here: '.freeze
   ENTER_MSG = 'Press ENTER to continue'.freeze
@@ -44,7 +43,7 @@ module App
   end
 
   def create_rental(book_index, person_index, date)
-    Rental.new(date, @people[person_index], @books[book_index])
+    @rentals << Rental.new(date, @people[person_index], @books[book_index])
     puts 'Rental created successfully'
     puts
   end
@@ -93,7 +92,7 @@ module App
 
   def load_persons
     if File.exist?('persons.json')
-      JSON.pare(File.read('persons.json')).map do |person|
+      JSON.parse(File.read('persons.json')).map do |person|
         if person['json_class'] == 'Student'
           load_student(person, 'learn to code')
         else
@@ -142,7 +141,7 @@ module App
 
   def save_files
     File.write('books.json', JSON.generate(@books)) if @books.any?
-    File.write('person.json', JSON.generate(@persons)) if @persons.any?
+    File.write('persons.json', JSON.generate(@people)) if @people.any?
     File.write('rentals.json', JSON.generate(@rentals)) if @rentals.any?
   end
 end

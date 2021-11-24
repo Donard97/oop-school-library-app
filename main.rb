@@ -12,6 +12,7 @@ class Main
     @main_ans = 0
     @books = []
     @people = []
+    @rentals = []
 
     puts 'Welcome to School Library App!'
     puts
@@ -132,7 +133,9 @@ class Main
     end
     puts 'Exiting session'
     puts 'Thank you for using the Library School App!'
+    save_files
   end
 end
 
-Main.new.main
+library = Main.new
+library.main
