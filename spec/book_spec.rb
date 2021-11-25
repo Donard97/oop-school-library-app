@@ -27,7 +27,7 @@ describe 'Book' do
       expect(@book.author).to eql 'Donard'
     end
   end
-  
+
   describe '#rentals' do
     it 'returns a has-many Rental relationship' do
       expect(@book).to have_attributes('rentals' => [])
