@@ -17,8 +17,16 @@ Current milestone is `Preserve data`
 
 ## Getting Started
 
-- git clone git@github.com:Donard97/oop-school-library-app.git
-- cd oop-school-library-app
+- Make sure you have `Ruby` installed in your system. You can install it [here](https://www.ruby-lang.org/en/documentation/installation/).
+- Clone this repository by running `git@github.com:Donard97/oop-school-library-app.git` in your command line.
+- Navigate to the repository by running `cd oop-school-library-app`.
+- Run the project by running `ruby main.rb` on the command line.
+- To run the `tests` make sure you install rspec gem by running `gem install rspec` on the command line then run `rspec spec` on the    command line to see the test passing
+
+## Optional
+
+- Run `bundle install` to install the `Ruby Gems` including `Rubocop`.
+
 ## Authors
 
 👤 **Donard Golaj**
