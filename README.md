@@ -35,6 +35,16 @@ Current milestone is `Preserve data`
 - Twitter: [@donardgolaj](https://twitter.com/donardgolaj)
 - LinkdIn : [@donard-golaj](https://www.linkedin.com/in/donard-golaj/)
 
+👤 **Olipliche Mavoungou Paka**
+- GitHub: [@OLIPLICHE](https://github.com/OLIPLICHE)
+- Twitter: [@olipliche1](https://twitter.com/olipliche1)
+- LinkedIn: [@olipliche](https://www.linkedin.com/in/olipliche/)
+
+
+👤 **Elmar Abdulkarimov**
+
+- GitHub: [@elmar8287](https://github.com/elmar8287)
+
 
 ## 🤝 Contributing
 
