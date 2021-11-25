@@ -2,27 +2,28 @@ require_relative '../classroom'
 require_relative '../student'
 
 describe Classroom do
-  before :each do
+  before(:each) do
     @classroom = Classroom.new('Learn to code')
-    @student = Student.new(age: 19, classroom: @classroom.label, name: 'Donard', parent_permission: true)
+    @student = Student.new(age: 30, classroom: @classroom.label, name: 'Paka', parent_permission: false)
   end
 
-  describe '#new' do
-    it 'takes one parameter and returns a Classroom object' do
-      expect(@classroom).to be_an_instance_of Classroom
-    end
+  it ' show instance of classroom class' do
+    expect(@classroom).to be_instance_of Classroom
   end
 
-  describe '#new' do
-    it 'add student details to student array' do
-      @classroom.add_student(@student)
-      expect(@classroom.students).to include@student
-    end
+  it 'add student details to student array' do
+    @classroom.add_student(@student)
+    expect(@classroom.students).to include @student
   end
 
-  describe '#label' do
-    it 'returns the correct label' do
-      expect(@classroom.label).to eq 'Learn to code'
-    end
+  it 'returns the correct label' do
+    expect(@classroom.label).to eq 'Learn to code'
+  end
+
+  it 'checks the size of students array' do
+    @student1 = Student.new(age: 24, classroom: @classroom.label, name: 'Donard', parent_permission: true)
+    @classroom.add_student(@student)
+    @classroom.add_student(@student1)
+    expect(@classroom.students.size).to be 2
   end
 end
