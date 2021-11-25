@@ -1,16 +1,19 @@
 require_relative '../corrector'
-describe Corrector do
+
+describe 'test for Corrector' do
   before :each do
     @corrector = Corrector.new
   end
-  describe '#new' do
-    it 'takes one parameter and returns a Corrector object' do
-      expect(@corrector).to be_an_instance_of Corrector
+
+  context '#correct_name' do
+    it 'Check if name is changed to capitals' do
+      name = @corrector.correct_name('donard')
+      expect(name).to eq 'Donard'
     end
-  end
-  describe '#correct_name' do
-    it 'returns a capitalized name' do
-      expect(@corrector.correct_name('Donard')).to eq 'donard'
+
+    it 'Reduce name to 10 characters' do
+      name = @corrector.correct_name('donard')
+      expect(name).to eq 'Donard'
     end
   end
 end
