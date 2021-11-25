@@ -21,4 +21,8 @@ describe Person do
   it 'Check the can use services of the person' do
     expect(@person.can_use_services?).to be true
   end
+
+  it 'Check the rentals of the person' do
+    expect(@person).to have_attributes('rentals' => [])
+  end
 end
