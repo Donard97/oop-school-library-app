@@ -24,13 +24,11 @@ Current milestone is `Preserve data`
 - To run the `tests` make sure you install rspec gem by running `gem install rspec` on the command line then run `rspec spec` on the    command line to see the test passing
 
 ## Optional
-
 - Run `bundle install` to install the `Ruby Gems` including `Rubocop`.
 
 ## Authors
 
 👤 **Donard Golaj**
-
 - Github : [@Donard97](https://github.com/Donard97)
 - Twitter: [@donardgolaj](https://twitter.com/donardgolaj)
 - LinkdIn : [@donard-golaj](https://www.linkedin.com/in/donard-golaj/)
@@ -40,9 +38,7 @@ Current milestone is `Preserve data`
 - Twitter: [@olipliche1](https://twitter.com/olipliche1)
 - LinkedIn: [@olipliche](https://www.linkedin.com/in/olipliche/)
 
-
 👤 **Elmar Abdulkarimov**
-
 - GitHub: [@elmar8287](https://github.com/elmar8287)
 
 
